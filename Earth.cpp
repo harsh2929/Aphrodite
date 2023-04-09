@@ -1,6 +1,5 @@
 //
-//  Created by Shabnam Sahay and Sambit Behera on 07/06/20.
-//  Rendering of Earth with simple atmospheric scattering for SOC OpenGL.
+//add more info
 //
 
 #include <GL/glew.h>
