@@ -1,7 +1,3 @@
-//
-//add more info
-//
-
 #include <GL/glut.h>
 #include <SOIL/SOIL.h>
 #include <cmath>
@@ -21,23 +17,21 @@ GLfloat sunlightSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat atmosphereColor[] = { 0.1f, 0.1f, 0.6f, 0.4f };
 GLfloat terrainColor[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 GLfloat rainIntensity = 0.0f;
+bool enableRain = true; // Option to enable/disable rain effect
 
 void loadTextures() {
     // Load Earth's texture
     glGenTextures(1, &earthTextureID);
     glBindTexture(GL_TEXTURE_2D, earthTextureID);
-    // Texture loading code goes here (similar to the original code)
-
+// add texture loading
     // Load Moon's texture
     glGenTextures(1, &moonTextureID);
     glBindTexture(GL_TEXTURE_2D, moonTextureID);
-    // Texture loading code goes here (load moon_texture.jpg or any desired image)
 
     // Load atmosphere texture
     glGenTextures(1, &atmosphereTextureID);
     glBindTexture(GL_TEXTURE_2D, atmosphereTextureID);
-    // Texture loading code goes here (load atmosphere_texture.jpg or any desired image)
-}
+//here}
 
 void renderEarth() {
     // Enable lighting and set up material properties for Earth
@@ -129,6 +123,10 @@ void renderMoon() {
 }
 
 void renderRain() {
+    if (!enableRain) {
+        return;
+    }
+
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(1.0f, 1.0f, 1.0f, rainIntensity); // Set rain color and intensity
@@ -186,6 +184,8 @@ void reshape(int width, int height) {
 void keyboard(unsigned char key, int x, int y) {
     if (key == 'q' || key == 'Q' || key == 27) {
         exit(0);
+    } else if (key == 'r' || key == 'R') {
+        enableRain = !enableRain; // Toggle rain effect
     }
 }
 
@@ -211,4 +211,3 @@ int main(int argc, char** argv) {
     glutMainLoop();
     return 0;
 }
-
